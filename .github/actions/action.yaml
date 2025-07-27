@@ -1,0 +1,48 @@
+name: Reusable Vercel Deploy Workflow
+
+description: A composite action for deploying to Vercel via GitHub Actions.
+
+inputs:
+  branch:
+    description: 'Branch name to deploy'
+    required: false
+    default: 'vercel'
+  git_name:
+    description: 'Git user.name to set'
+    required: false
+    default: 'GitHub Actions'
+  git_email:
+    description: 'Git user.email to set'
+    required: false
+    default: 'actions@github.com'
+  commit_message:
+    description: 'Commit message to use'
+    required: false
+    default: "Add files for Vercel deployment at $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Keep only Vercel deploy files
+      shell: bash
+      run: |
+        ls -la
+        chmod +x ./clean-unwanted-files.sh
+        bash ./clean-unwanted-files.sh
+
+    - name: Configure Git
+      shell: bash
+      run: |
+        git config user.name "${{ inputs.git_name }}"
+        git config user.email "${{ inputs.git_email }}"
+
+    - name: Commit and push to Vercel branch
+      shell: bash
+      run: |
+        git fetch origin ${{ inputs.branch }} || echo "No existing branch."
+        git checkout -b ${{ inputs.branch }} || git checkout ${{ inputs.branch }}
+        xargs -a .vercelkeep -I {} git add {}
+        git commit -m "${{ inputs.commit_message }}"
+        git push origin ${{ inputs.branch }} --force

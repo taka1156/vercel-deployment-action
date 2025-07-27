@@ -11,15 +11,15 @@ if [ ! -f "$VERCEL_KEEP_FILE_NAME" ]; then
   exit 1
 fi
 
-if [ ! -f ../src/clean-unwanted-files.sh ]; then
-  echo "❌ Error: ../src/clean-unwanted-files.sh not found!"
+if [ ! -f ../test/clean-unwanted-files.sh ]; then
+  echo "❌ Error: ../test/clean-unwanted-files.sh not found!"
   exit 1
 fi
 
 echo "✅ All required files found. Starting the test..."
 
-echo "🚀 Running clean-unwanted-files.sh..."
-bash ../src/clean-unwanted-files.sh
+echo "🚀 Running ../test/clean-unwanted-files.sh..."
+bash ../test/clean-unwanted-files.sh
 
 if [ $? -eq 0 ]; then
   echo "🎉 Test script executed successfully!"

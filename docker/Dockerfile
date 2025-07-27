@@ -4,8 +4,9 @@ RUN apt-get update && apt-get install -y git bash
 
 WORKDIR /app
 
-COPY src/ ./src/
+COPY test ./test
+ADD .github/actions/clean-unwanted-files.sh ./test
 
-RUN chmod +x src/setup-test.sh src/test.sh src/clean-unwanted-files.sh
+RUN chmod -R +x ./test/shell
 
-CMD ["bash", "-c", "bash src/setup-test.sh && bash src/test.sh"]
+CMD ["bash", "-c", "bash test/shell/setup.sh && bash test/shell/test.sh"]

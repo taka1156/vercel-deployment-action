@@ -4,25 +4,28 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch name to deploy'
+        description: "Branch name to deploy"
         required: false
-        default: 'test-vercel'
+        default: "test-vercel"
       git_name:
-        description: 'Git user.name for testing'
+        description: "Git user.name for testing"
         required: false
-        default: 'Test Actions'
+        default: "Test Actions"
       git_email:
-        description: 'Git user.email for testing'
+        description: "Git user.email for testing"
         required: false
-        default: 'test@example.com'
+        default: "test@example.com"
       commit_message:
-        description: 'Commit message for testing'
+        description: "Commit message for testing"
         required: false
-        default: 'Test Commit for Vercel Deployment'
+        default: "Test Commit for Vercel Deployment"
   push:
     branches:
       - master
   pull_request:
+
+env:
+  root_path: test-vercelkeep
 
 jobs:
   test-reusable-workflow:
@@ -30,14 +33,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: test clean-unwanted-files.sh
+      - name: Test clean-unwanted-files.sh
         run: |
           chmod +x scripts/docker-run.sh
           bash scripts/docker-run.sh
 
-      # WIP
-      # - name: test workflow
-      #   uses: .github/workflows/create-vercel-branch.yaml
+      # - name: Setup files
+      #   run: |
+      #     chmod +x test/setup-test.sh
+      #     bash test/setup-test.sh
+
+      # - name: Test workflow
+      #   uses: ./.github/actions
       #   with:
       #     branch: ${{ inputs.branch }}
       #     git_name: ${{ inputs.git_name }}
