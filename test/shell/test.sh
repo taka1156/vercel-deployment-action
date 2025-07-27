@@ -28,7 +28,7 @@ else
   exit 1
 fi
 
-# 状態確認
+# status
 echo "🔎 Verifying repository state after test..."
 EXPECTED_FILES=("important.txt" "keep-me.js" ".vercelkeep")
 ACTUAL_FILES=$(git ls-files)
@@ -49,5 +49,5 @@ for file in $ACTUAL_FILES; do
   fi
 done
 
-# 完了
+# finish
 echo "🎊 All done!"
