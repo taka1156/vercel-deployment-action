@@ -1,4 +1,4 @@
-# action-vercel-pages　(WIP)
+# action-vercel-pages(WIP)
 
 ## Workflow for Deployment to Vercel
 
