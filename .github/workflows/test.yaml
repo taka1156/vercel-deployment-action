@@ -36,7 +36,7 @@ jobs:
           bash scripts/docker-run.sh
 
       - name: test workflow
-        uses: ./vercel-deploy.yml
+        uses: ./create-vercel-branch.yaml
         with:
           branch: ${{ inputs.branch }}
           git_name: ${{ inputs.git_name }}
