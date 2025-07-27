@@ -32,3 +32,4 @@ jobs:
           git_name: "Test Actions"
           git_email: "test@example.com"
           commit_message: "Test Commit for Vercel Deployment"
+          dry_run: "true"

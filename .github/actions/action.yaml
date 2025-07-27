@@ -19,6 +19,10 @@ inputs:
     description: 'Commit message to use'
     required: false
     default: "Add files for Vercel deployment at $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')"
+  dry_run:
+    description: 'An option to avoid getting stuck when pushing with act.'
+    required: false
+    default: "false"
 
 runs:
   using: "composite"
@@ -45,4 +49,10 @@ runs:
         git checkout -b ${{ inputs.branch }} || git checkout ${{ inputs.branch }}
         xargs -a .vercelkeep -I {} git add {}
         git commit -m "${{ inputs.commit_message }}"
-        git push origin ${{ inputs.branch }} --force
+
+        if [ "${{ inputs.dry_run }}" = "false" ]; then
+          echo "Executing actual git push..."
+          git push origin ${{ inputs.branch }} --force
+        fi
+
+        echo "🏁 finish"
