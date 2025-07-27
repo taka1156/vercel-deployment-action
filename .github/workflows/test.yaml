@@ -19,6 +19,10 @@ on:
         description: 'Commit message for testing'
         required: false
         default: 'Test Commit for Vercel Deployment'
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   test-reusable-workflow:
