@@ -3,4 +3,4 @@ if [ ! -f "bin/act" ]; then
     export PATH=$PATH:/root/bin
 fi
 
-bin/act -j test-reusable-workflow -P medium=ubuntu-latest -s USER_EMAIL="test@example.com" -s USER_NAME="Test Actions"
+bin/act push -P medium=ubuntu-latest -s USER_EMAIL="test@example.com" -s USER_NAME="Test Actions"
