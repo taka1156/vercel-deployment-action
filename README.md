@@ -70,4 +70,4 @@ which is then set as the production branch in Vercel settings to enable a compar
 
 
 ## TODO
-- [] Migrate testing and operation verification environments to Act and Devcontainer.
+- [ ] Migrate testing and operation verification environments to Act and Devcontainer.
