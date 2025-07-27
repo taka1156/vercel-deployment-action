@@ -35,12 +35,11 @@ jobs:
           chmod +x scripts/docker-run.sh
           bash scripts/docker-run.sh
 
-      - name: test workflow
-        uses: ./create-vercel-branch.yaml
-        with:
-          branch: ${{ inputs.branch }}
-          git_name: ${{ inputs.git_name }}
-          git_email: ${{ inputs.git_email }}
-          commit_message: ${{ inputs.commit_message }}
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # WIP
+      # - name: test workflow
+      #   uses: .github/workflows/create-vercel-branch.yaml
+      #   with:
+      #     branch: ${{ inputs.branch }}
+      #     git_name: ${{ inputs.git_name }}
+      #     git_email: ${{ inputs.git_email }}
+      #     commit_message: ${{ inputs.commit_message }}

@@ -23,9 +23,6 @@ on:
         required: false
         default: "Add files for Vercel deployment at $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')"
         type: string
-    secrets:
-      GITHUB_TOKEN:
-        required: true
 
 jobs:
   create-vercel-branch:
