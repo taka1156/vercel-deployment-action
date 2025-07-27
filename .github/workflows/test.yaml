@@ -26,18 +26,21 @@ on:
 
 jobs:
   test-reusable-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-    - name: test clean-unwanted-files.sh
-      run: |
-        chmod +x scripts/docker-run.sh
-        bash scripts/docker-run.sh
+      - name: test clean-unwanted-files.sh
+        run: |
+          chmod +x scripts/docker-run.sh
+          bash scripts/docker-run.sh
 
-    - name: test workflow
-      uses: ./vercel-deploy.yml
-      with:
-        branch: ${{ inputs.branch }}
-        git_name: ${{ inputs.git_name }}
-        git_email: ${{ inputs.git_email }}
-        commit_message: ${{ inputs.commit_message }}
-      secrets:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: test workflow
+        uses: ./vercel-deploy.yml
+        with:
+          branch: ${{ inputs.branch }}
+          git_name: ${{ inputs.git_name }}
+          git_email: ${{ inputs.git_email }}
+          commit_message: ${{ inputs.commit_message }}
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -21,7 +21,7 @@ on:
       commit_message:
         description: 'Commit message to use'
         required: false
-        default: 'Add files for Vercel deployment at $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')'
+        default: "Add files for Vercel deployment at $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')"
         type: string
     secrets:
       GITHUB_TOKEN:
@@ -30,7 +30,6 @@ on:
 jobs:
   create-vercel-branch:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
