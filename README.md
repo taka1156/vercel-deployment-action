@@ -2,8 +2,7 @@
 
 ## Workflow for Deployment to Vercel
 
-The concept is similar to using actions to create a `gh-pages` branch for deployment. Here, actions are used to create a `vercel` branch,  
-which is then set as the production branch in Vercel settings to enable a comparable operational setup.
+The concept is similar to using actions to create a `gh-pages` branch for deployment. Here, actions are used to create a `vercel` branch, which is then set as the production branch in Vercel settings to enable a comparable operational setup.
 
 ## Workflow Steps
 1. Organize files in actions based on the contents listed in `.vercelkeep`. The patterns are as follows:
@@ -19,8 +18,7 @@ which is then set as the production branch in Vercel settings to enable a compar
 ## Post-Setup
 1. For the first time setup, update the settings in Vercel under **Settings > Environments > Production** and set the **Branch Tracking** to `vercel`.
 
-2. Optionally, you can add the following configuration to prevent builds from running on branches other than `vercel`.  
-   For the GUI, this can be achieved under **Settings > Git** in the **Ignored Build Step**. (This is not directly related to the workflow and is optional.)
+2. Optionally, you can add the following configuration to prevent builds from running on branches other than `vercel`. For the GUI, this can be achieved under **Settings > Git** in the **Ignored Build Step**. (This is not directly related to the workflow and is optional.)
 
 
    <details>
@@ -33,14 +31,13 @@ which is then set as the production branch in Vercel settings to enable a compar
     echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
 
     if [[ "$VERCEL_GIT_COMMIT_REF" == "vercel" && "$VERCEL_ENV" == "production" ]] ; then
-    # Proceed with the build
-        echo "✅ - Build can proceed"
-    exit 1;
-
+       # Proceed with the build
+       echo "✅ - Build can proceed"
+       exit 1;
     else
-    # Don't build
-    echo "🛑 - Build cancelled"
-    exit 0;
+       # Don't build
+       echo "🛑 - Build cancelled"
+       exit 0;
     fi
     ```
 
