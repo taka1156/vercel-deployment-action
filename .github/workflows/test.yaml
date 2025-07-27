@@ -1,0 +1,39 @@
+name: Test Vercel Deploy Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name to deploy'
+        required: false
+        default: 'test-vercel'
+      git_name:
+        description: 'Git user.name for testing'
+        required: false
+        default: 'Test Actions'
+      git_email:
+        description: 'Git user.email for testing'
+        required: false
+        default: 'test@example.com'
+      commit_message:
+        description: 'Commit message for testing'
+        required: false
+        default: 'Test Commit for Vercel Deployment'
+
+jobs:
+  test-reusable-workflow:
+
+    - name: test clean-unwanted-files.sh
+      run: |
+        chmod +x scripts/docker-run.sh
+        bash scripts/docker-run.sh
+
+    - name: test workflow
+      uses: ./vercel-deploy.yml
+      with:
+        branch: ${{ inputs.branch }}
+        git_name: ${{ inputs.git_name }}
+        git_email: ${{ inputs.git_email }}
+        commit_message: ${{ inputs.commit_message }}
+      secrets:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
